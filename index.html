@@ -1,5 +1,5 @@
-extends includes/layout.pug
+extends views/index
 
-block content
-  include includes/recent-posts.pug
-  include includes/pagination.pug
+block head
+  title
+    = config.title
