@@ -94,13 +94,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="原码, 反码, 补码 详解本篇文章讲解了计算机的原码, 反码和补码. 并且进行了深入探求了为何要使用反码和补码, 以及更进一步的论证了为何可以用反码, 补码的加法计算原码的减法. 论证部分如有不对的地方请各位牛人帮忙指正! 希望本文对大家学习计算机基础有所帮助! 一.机器数和真值在学习原码, 反码和补码之前, 需要先了解机器数和真值的概念. 1、机器数一个数在计算机中的二进制表示形式,  叫做这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原码, 反码, 补码 详解">
+<meta property="og:url" content="http://yoursite.com/2019/09/24/原码, 反码, 补码 详解/index.html">
 <meta property="og:site_name" content="且听风吟">
+<meta property="og:description" content="原码, 反码, 补码 详解本篇文章讲解了计算机的原码, 反码和补码. 并且进行了深入探求了为何要使用反码和补码, 以及更进一步的论证了为何可以用反码, 补码的加法计算原码的减法. 论证部分如有不对的地方请各位牛人帮忙指正! 希望本文对大家学习计算机基础有所帮助! 一.机器数和真值在学习原码, 反码和补码之前, 需要先了解机器数和真值的概念. 1、机器数一个数在计算机中的二进制表示形式,  叫做这个">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="data:image/jpg;base64,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">
+<meta property="og:updated_time" content="2019-09-24T13:21:42.923Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟">
+<meta name="twitter:title" content="原码, 反码, 补码 详解">
+<meta name="twitter:description" content="原码, 反码, 补码 详解本篇文章讲解了计算机的原码, 反码和补码. 并且进行了深入探求了为何要使用反码和补码, 以及更进一步的论证了为何可以用反码, 补码的加法计算原码的减法. 论证部分如有不对的地方请各位牛人帮忙指正! 希望本文对大家学习计算机基础有所帮助! 一.机器数和真值在学习原码, 反码和补码之前, 需要先了解机器数和真值的概念. 1、机器数一个数在计算机中的二进制表示形式,  叫做这个">
+<meta name="twitter:image" content="data:image/jpg;base64,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">
 
 
 
@@ -130,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/24/原码, 反码, 补码 详解/">
 
 
 
 
 
-  <title>且听风吟</title>
+  <title>原码, 反码, 补码 详解 | 且听风吟</title>
   
 
 
@@ -155,8 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -229,9 +234,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -261,9 +266,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/24/原码, 反码, 补码 详解/" itemprop="url">原码, 反码, 补码 详解</a></h1>
+          <h1 class="post-title" itemprop="name headline">原码, 反码, 补码 详解</h1>
         
 
         <div class="post-meta">
@@ -313,9 +316,7 @@
       
 
       
-        
-          
-            <h1 id="原码-反码-补码-详解"><a href="#原码-反码-补码-详解" class="headerlink" title="原码, 反码, 补码 详解"></a><strong>原码, 反码, 补码 详解</strong></h1><p>本篇文章讲解了计算机的原码, 反码和补码. 并且进行了深入探求了为何要使用反码和补码, 以及更进一步的论证了为何可以用反码, 补码的加法计算原码的减法. 论证部分如有不对的地方请各位牛人帮忙指正! 希望本文对大家学习计算机基础有所帮助!</p>
+        <h1 id="原码-反码-补码-详解"><a href="#原码-反码-补码-详解" class="headerlink" title="原码, 反码, 补码 详解"></a><strong>原码, 反码, 补码 详解</strong></h1><p>本篇文章讲解了计算机的原码, 反码和补码. 并且进行了深入探求了为何要使用反码和补码, 以及更进一步的论证了为何可以用反码, 补码的加法计算原码的减法. 论证部分如有不对的地方请各位牛人帮忙指正! 希望本文对大家学习计算机基础有所帮助!</p>
 <h2 id="一-机器数和真值"><a href="#一-机器数和真值" class="headerlink" title="一.机器数和真值"></a><strong>一</strong>.<strong>机器数和真值</strong></h2><p>在学习原码, 反码和补码之前, 需要先了解机器数和真值的概念.</p>
 <h3 id="1、机器数"><a href="#1、机器数" class="headerlink" title="1、机器数"></a><strong>1、机器数</strong></h3><p>一个数在计算机中的二进制表示形式,  叫做这个数的机器数。机器数是带符号的，在计算机用一个数的最高位存放符号, 正数为0, 负数为1.</p>
 <p>比如，十进制中的数 +3 ，计算机字长为8位，转换成二进制就是00000011。如果是 -3 ，就是 10000011 。</p>
@@ -451,8 +452,6 @@
 <p>此时, 表盘相当于每128个刻度转一轮. 所以用补码表示的运算结果最小值和最大值应该是[-128, 128].</p>
 <p>但是由于0的特殊情况, 没有办法表示128, 所以补码的取值范围是[-128, 127]</p>
 
-          
-        
       
     </div>
     
@@ -466,140 +465,40 @@
     
     <div>
   
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
 </div>
 
     <footer class="post-footer">
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/test-my-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shi Haoming">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/image/picture.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="且听风吟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/23/test-my-blog/" itemprop="url">test_my_blog</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T08:39:46+08:00">
-                2019-09-23
-              </time>
+              <a href="/2019/09/23/test-my-blog/" rel="next" title="test_my_blog">
+                <i class="fa fa-chevron-left"></i> test_my_blog
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-    <div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -609,145 +508,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shi Haoming">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/image/picture.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="且听风吟">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/23/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T08:38:03+08:00">
-                2019-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-    <div>
-  
-</div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -755,6 +520,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -775,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -820,6 +598,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原码-反码-补码-详解"><span class="nav-number">1.</span> <span class="nav-text">原码, 反码, 补码 详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-机器数和真值"><span class="nav-number">1.1.</span> <span class="nav-text">一.机器数和真值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、机器数"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、机器数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、真值"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、真值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-原码-反码-补码的基础概念和计算方法"><span class="nav-number">1.2.</span> <span class="nav-text">二. 原码, 反码, 补码的基础概念和计算方法.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-原码"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 原码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-反码"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 反码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-补码"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 补码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-为何要使用原码-反码和补码"><span class="nav-number">1.3.</span> <span class="nav-text">三.为何要使用原码,反码和补码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-原码-反码-补码再深入"><span class="nav-number">1.4.</span> <span class="nav-text">四 原码,反码,补码再深入</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -977,6 +771,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
